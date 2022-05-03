@@ -1,0 +1,22 @@
+LIBRARY TORCH_TENSORRT
+EXPORTS
+??0Input@ir@core@torch_tensorrt@@QEAA@V?$vector@_JV?$allocator@_J@std@@@std@@00W4DataType@nvinfer1@@W4TensorFormat@7@_N@Z
+?get_current_device@runtime@core@torch_tensorrt@@YA?AUCudaDevice@123@XZ
+?CompileGraph@core@torch_tensorrt@@YA?AUModule@jit@torch@@AEBU345@UCompileSpec@12@@Z
+?ConvertGraphToTRTEngine@core@torch_tensorrt@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBUModule@jit@torch@@V34@UCompileSpec@12@@Z
+?CheckMethodOperatorSupport@core@torch_tensorrt@@YA_NAEBUModule@jit@torch@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+?get_logger@logging@util@core@torch_tensorrt@@YAAEAVTorchTRTLogger@1234@XZ
+?get_is_colored_output_on@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAA_NXZ
+?get_reportable_log_level@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAA?AW4LogLevel@2345@XZ
+?get_logging_prefix@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ
+?set_is_colored_output_on@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAAX_N@Z
+?set_reportable_log_level@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAAXW4LogLevel@2345@@Z
+?set_logging_prefix@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+?log@TorchTRTLogger@logging@util@core@torch_tensorrt@@QEAAXW4LogLevel@2345@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+?set_device@core@torch_tensorrt@@YAXH@Z
+?EmbedEngineInNewModule@core@torch_tensorrt@@YA?AUModule@jit@torch@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UCudaDevice@runtime@12@@Z
+??0Error@torch_tensorrt@@QEAA@PEBDIAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEBX@Z
+??0CudaDevice@runtime@core@torch_tensorrt@@QEAA@_JW4DeviceType@nvinfer1@@@Z
+?execute_engine@runtime@core@torch_tensorrt@@YA?AV?$vector@VTensor@at@@V?$allocator@VTensor@at@@@std@@@std@@V45@V?$intrusive_ptr@UTRTEngine@runtime@core@torch_tensorrt@@U?$intrusive_target_default_null_type@UTRTEngine@runtime@core@torch_tensorrt@@@detail@c10@@@c10@@@Z
+??0TRTEngine@runtime@core@torch_tensorrt@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0UCudaDevice@123@@Z
+??0Input@ir@core@torch_tensorrt@@QEAA@V?$vector@_JV?$allocator@_J@std@@@std@@W4DataType@nvinfer1@@W4TensorFormat@7@_N@Z

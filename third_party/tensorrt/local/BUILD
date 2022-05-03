@@ -89,7 +89,7 @@ cc_library(
         "@cuda//:cudart",
         "@cudnn",
     ] + select({
-        ":windows": ["@cuda//:cublas"],
+        ":windows": ["@cuda//:cublas", "nvinfer_static_lib"],
         "//conditions:default": ["@cuda//:cublas"],
     }),
 )
@@ -295,7 +295,7 @@ cc_library(
     }),
     srcs = select({
         ":aarch64_linux": ["lib/aarch64-linux-gnu/libnvinfer_plugin.so"],
-        ":windows": ["lib/nvinfer_plugin.dll"],
+        ":windows": ["lib/nvinfer_plugin.lib", "lib/nvinfer_plugin.dll"],
         "//conditions:default": ["lib/x86_64-linux-gnu/libnvinfer_plugin.so"],
     }),
     includes = select({

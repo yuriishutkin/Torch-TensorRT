@@ -38,5 +38,10 @@ cc_binary(
     linkstatic = True,
     deps = [
         "//cpp:torch_tensorrt",
+        "//core/runtime:runtime",
+        "//core/plugins:torch_tensorrt_plugins"
     ],
+	win_def_file = "exports.def"
 )
+
+

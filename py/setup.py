@@ -72,7 +72,7 @@ def which(program):
     return None
 
 
-BAZEL_EXE = which("bazelisk")
+BAZEL_EXE = which("bazelisk.exe")
 
 if BAZEL_EXE is None:
     BAZEL_EXE = which("bazel")
@@ -110,7 +110,7 @@ def build_libtorchtrt_pre_cxx11_abi(develop=True, use_dist_dir=True, cxx11_abi=F
 
 def gen_version_file():
     if not os.path.exists(dir_path + '/torch_tensorrt/_version.py'):
-        os.mknod(dir_path + '/torch_tensorrt/_version.py')
+        os.open(dir_path + '/torch_tensorrt/_version.py', os.O_RDWR|os.O_CREAT)
 
     with open(dir_path + '/torch_tensorrt/_version.py', 'w') as f:
         print("creating version file")
@@ -229,27 +229,32 @@ class CleanCommand(Command):
 
 ext_modules = [
     cpp_extension.CUDAExtension(
-        'torch_tensorrt._C', [
+        name = 'torch_tensorrt._C', 
+        sources = [
             'torch_tensorrt/csrc/torch_tensorrt_py.cpp',
             'torch_tensorrt/csrc/tensorrt_backend.cpp',
             'torch_tensorrt/csrc/tensorrt_classes.cpp',
             'torch_tensorrt/csrc/register_tensorrt_classes.cpp',
         ],
+        language='c++',
         library_dirs=[(dir_path + '/torch_tensorrt/lib/'), "/opt/conda/lib/python3.6/config-3.6m-x86_64-linux-gnu"],
-        libraries=["torchtrt"],
+        libraries=["torch_tensorrt.dll.if"],
         include_dirs=[
             dir_path + "torch_tensorrt/csrc", dir_path + "torch_tensorrt/include",
             dir_path + "/../bazel-TRTorch/external/tensorrt/include",
             dir_path + "/../bazel-Torch-TensorRT/external/tensorrt/include", dir_path + "/../"
         ],
         extra_compile_args=[
-            "-Wno-deprecated",
-            "-Wno-deprecated-declarations",
-        ] + (["-D_GLIBCXX_USE_CXX11_ABI=1"] if CXX11_ABI else ["-D_GLIBCXX_USE_CXX11_ABI=0"]),
+            "/D", "PYBIND11_EXPORT=",
+            "/DNO_EXPORT"
+            #"-Wno-deprecated",
+            #"-Wno-deprecated-declarations",
+        ] + (["/D", "_GLIBCXX_USE_CXX11_ABI=1"] if CXX11_ABI else ["/D", "_GLIBCXX_USE_CXX11_ABI=0"]),
         extra_link_args=[
-            "-Wno-deprecated", "-Wno-deprecated-declarations", "-Wl,--no-as-needed", "-ltorchtrt",
-            "-Wl,-rpath,$ORIGIN/lib", "-lpthread", "-ldl", "-lutil", "-lrt", "-lm", "-Xlinker", "-export-dynamic"
-        ] + (["-D_GLIBCXX_USE_CXX11_ABI=1"] if CXX11_ABI else ["-D_GLIBCXX_USE_CXX11_ABI=0"]),
+            "/OPT:NOREF"
+            #"-Wno-deprecated", "-Wno-deprecated-declarations", "-Wl,--no-as-needed", "-ltorchtrt",
+            #"-Wl,-rpath,$ORIGIN/lib", "-lpthread", "-ldl", "-lutil", "-lrt", "-lm", "-Xlinker", "-export-dynamic"
+        ],
         undef_macros=["NDEBUG"])
 ]
 
